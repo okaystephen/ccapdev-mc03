@@ -26,6 +26,10 @@ const controller = {
     */
     getCheckNumber: function(req, res) {
         // your code here
+        var idVal = req.query.idVal;
+        db.findOne(User, {idVal: idVal}, 'idVal', function (result) {
+            res.send(result);
+        });
     },
 
     /*
@@ -36,6 +40,19 @@ const controller = {
     */
     getAdd: function(req, res) {
         // your code here
+        var idName = req.body.idName;
+        var idVal = req.body.idVal;
+
+        var user = {
+            idName: idName,
+            idVal: idVal
+        }
+
+        db.insertOne(User, user, function(flag) {
+            if(flag) {
+                // res.redirect('/success?name=' + idName +'&num=' + idVal);
+            }
+        });
     },
 
     /*
@@ -46,6 +63,7 @@ const controller = {
     */
     getDelete: function (req, res) {
         // your code here
+
     }
 
 }

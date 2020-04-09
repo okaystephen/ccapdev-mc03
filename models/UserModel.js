@@ -8,6 +8,14 @@ var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
     // your code here
+    idName: {
+        type: String,
+        required: true
+    },
+    idVal: {
+        type: Number,
+        required: true
+    }
 });
 
 module.exports = mongoose.model('User', UserSchema);
