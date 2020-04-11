@@ -40,18 +40,25 @@ const controller = {
     */
     getAdd: function(req, res) {
         // your code here
-        var idName = req.body.idName;
-        var idVal = req.body.idVal;
+        var idName = req.query.idName;
+        var idVal = req.query.idVal;
 
         var user = {
             idName: idName,
             idVal: idVal
         }
 
-        db.insertOne(User, user, function(flag) {
-            if(flag) {
-                // res.redirect('/success?name=' + idName +'&num=' + idVal);
+        db.insertOne(User, user, function(flag){
+            if(flag){
+                // res.redirect('/add?idName=' + idName + '&idVal=' + idVal);
+                console.log('User successfully added.');
             }
+        });
+
+        // res.render('home', user);
+        res.render('home', {
+            name: idName,
+            number: idVal
         });
     },
 

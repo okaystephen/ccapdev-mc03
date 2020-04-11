@@ -47,15 +47,14 @@ $(document).ready(function () {
     */
     $('#submit').click(function () {
         // your code here
-        
         var idName = $('#name').val();
         var idVal = $('#number').val();
         
         if (idName != '' && idVal != '' ) {
-            alert('We');
-            $.get('/getAdd', {idName: idName, idVal: idVal}, function (result) {
-                result.redirect('/');
+            $.get('/add', {idName: idName, idVal: idVal}, function (result) {
+                $('#contacts').append(result);
             });
+
             $('#name').val('');
             $('#number').val('');
         } else if (idName == '' && idVal == '') {
@@ -76,8 +75,13 @@ $(document).ready(function () {
     */
     $('#contacts').on('click', '.remove', function () {
         // your code here
-        // document.getElementsByClassName('contact').remove();
-        this.remove();
+
+        // var idName = $('#name').val();
+        // var idVal = $('#number').val();
+        this.parentNode.parentNode.removeChild(this.parentNode);
+        // $.get('/delete', {idName: idName, idVal: idVal}, function (result) {
+                
+        // });
     });
 
 })
