@@ -14,7 +14,9 @@ const controller = {
     */
     getIndex: function(req, res) {
         // your code here
-        res.render('home'); // This is to load the page initially
+        db.findMany(User, {}, null, function (result) {
+            res.render('home', {contact: result}); // This is to load the page initially
+        });
     },
 
     /*
@@ -50,15 +52,11 @@ const controller = {
 
         db.insertOne(User, user, function(flag){
             if(flag){
-                // res.redirect('/add?idName=' + idName + '&idVal=' + idVal);
-                console.log('User successfully added.');
+                console.log('Contact successfully added.');
+                res.render('./partials/card', {name: idName, number: idVal}, function (err, html) {
+                    res.send(html);
+                });
             }
-        });
-
-        // res.render('home', user);
-        res.render('home', {
-            name: idName,
-            number: idVal
         });
     },
 
@@ -70,7 +68,17 @@ const controller = {
     */
     getDelete: function (req, res) {
         // your code here
+        var idName = req.query.idName;
+        var idVal = req.query.idVal;
 
+        var user = {
+            idName: idName,
+            idVal: idVal
+        }
+        
+        db.deleteOne(User, user, function(result){
+            res.send(result);
+        });
     }
 
 }

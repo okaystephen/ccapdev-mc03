@@ -26,9 +26,9 @@
             -->
             <div id="contacts">
             <!-- your code here -->
-                {{> card name=idName number=idVal}}
-                {{> card name=idName number=idVal}}
-                {{> card name=idName number=idVal}}
+                {{#each contact}}
+                    {{> card name=idName number=idVal}}
+                {{/each}}
             </div>
         </div>
     </div>

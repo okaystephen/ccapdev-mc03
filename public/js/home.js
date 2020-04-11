@@ -54,7 +54,6 @@ $(document).ready(function () {
             $.get('/add', {idName: idName, idVal: idVal}, function (result) {
                 $('#contacts').append(result);
             });
-
             $('#name').val('');
             $('#number').val('');
         } else if (idName == '' && idVal == '') {
@@ -75,13 +74,14 @@ $(document).ready(function () {
     */
     $('#contacts').on('click', '.remove', function () {
         // your code here
-
-        // var idName = $('#name').val();
-        // var idVal = $('#number').val();
-        this.parentNode.parentNode.removeChild(this.parentNode);
-        // $.get('/delete', {idName: idName, idVal: idVal}, function (result) {
-                
-        // });
+        var idName = $(this).prev().children('.text:nth-child(1)').html();
+        var idVal = $(this).prev().children('.text:nth-child(2)').html();
+        var parseName = idName.split(" ");
+        var parent = this.parentNode;
+        
+        $.get('/delete', {idName: parseName[1], idVal: parseInt(idVal)}, function (result) {
+            parent.parentNode.removeChild(parent);
+        });
     });
 
 })
