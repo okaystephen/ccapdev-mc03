@@ -74,12 +74,12 @@ $(document).ready(function () {
     */
     $('#contacts').on('click', '.remove', function () {
         // your code here
-        var idName = $(this).prev().children('.text:nth-child(1)').html();
-        var idVal = $(this).prev().children('.text:nth-child(2)').html();
+        var idName = $(this).prev().children('.text:nth-child(1)').text();
+        var idVal = $(this).prev().children('.text:nth-child(2)').text();
         var parseName = idName.split(" ");
         var parent = this.parentNode;
         
-        $.get('/delete', {idName: parseName[1], idVal: parseInt(idVal)}, function (result) {
+        $.get('/delete', {idName: idName.trim(), idVal: parseInt(idVal)}, function (result) {
             parent.parentNode.removeChild(parent);
         });
     });
